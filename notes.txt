@@ -1,0 +1,506 @@
+OpenCV
+It is a open source programming library with real-time CV capabilities/applications.
+
+
+===========================================================================================================================================
+Modules in OpenCV
+===========================================================================================================================================
+    Core
+        basic core fn. (i.e., img matrix addition), DS, serves functionality to other modules    
+
+    Imgproc
+        img processing - colour spaces mgmt, geometrical transformation, histograms, image filtering 
+        {to blur/clear img, using guassian filter and high/low pass filter}
+
+    dnn
+        to load a serialized deep n/w model
+        API for new layer creation, contruct or modify layers in NN 
+        Set of built-in useful layers
+    
+    ml
+        ML library for regression, clustering or classification task
+       {regression means to find relation btw 2 var.} 
+
+    video
+        background subtraction, motion estimation, object-tracking algorithms
+        
+    Highgui
+        create/manipulate windows that can display img.
+        add trackbars to the windows, keyboard cmd, and handle mouse events
+
+    features2D
+        feature detectors, descriptors, descriptors matchers 
+
+    flann
+        High lvl UI module - Fast library for Approximate Nearest Neighbours (FLANN)
+        collections of algo. that're suited for fast Nearest Neighbours searches.  
+        {clustering and searching in multi-dimensional spaces} 
+    
+    photo
+        for computational photography
+
+    stiching
+        implements stiching pipeline that performs automatic panoramic image stiching
+
+    shape
+        shape dist. and matching
+        used for shape matching, retrieval, & comparison
+
+    superres
+        contains classes and methods that can be used for resolution enhancement (for a specific frame)
+    
+    videostab
+        contains classes and methods that can be used for video stabilization
+
+    viz
+        it is a 3D visualizer - display widgets that provide several methods to interact with scenes and widgets.
+
+    ImgCodecs
+        img. file reading and writing
+
+    Objdetect
+        detection of objects and instances of predefined classes (i.e., face, eyes, people)
+
+    calib3D
+        camera calibration and 3D reconstruction
+        covers basic multiple - view geometry algorithms, stereo correspondence algo. 
+        object pose estimation, both single and stereo camera calibration, 3D reconstruction
+
+
+
+===========================================================================================================================================
+Applications and basics
+===========================================================================================================================================
+CV applications :
+    Features matching                               3D image Stiching
+    Ego Motion estimation                           Medical image analysis
+    Human computer interface                        Stereo vision(for calculating depth)
+    Sementation and recognition                     Structure from motion
+    Augmented Reality                               Motion tracking
+
+
+CV libraries for diff. tasks :
+    images          :   NumPy, OpenCV, scikit-image, PIL Pillow   
+    text            :   NLTK, spaCy, NumPy, scikit-learn, PyTorch
+    audio           :   libROSA
+    ml              :   pandas, scikit-learn, Orange, PyBrain
+    
+    To see data clearly             :   Matplotlib, Seaborn, scikit-learn, Orange
+    To use Deep learning            :   TensorFlow, PyTorch, Theano, Keras
+    To do scientific computing      :   SciPy
+    To integrate Web applications   :   Django, Flask
+
+
+NumPy
+    Provides support for large, multi-dimensional arrays.
+    It is able to divide a task into multiple sub-parts and process them simultaneously.
+    {Data must be Homogneous, whereas in Python Lists - it can be heterogeneous}
+    its fn. are implemented in C, hence fast.
+
+scikit-image
+    includes algo. for segmentation, transformations, color space manipulation, 
+    analysis, filtering, feature detection, thresholding...
+
+Pillow or PIL
+    supports multiple image formats.
+
+
+
+===========================================================================================================================================
+Image Basics
+===========================================================================================================================================
+Image
+    It can be described as a 2D fn. f(x,y), where (x,y) are the spatial coordinates, 
+    & the value of f at any point (x,y) is proportional to the brightness or gray levels of the img.
+
+    f(x, y) ranges from [0, L-1], where L = 256 for a 8-bit img.
+        {i.e., we need 8bits to store 1 pixel info.}
+
+
+Img. vs Digital img. 
+    value of f(x,y) will always be a discrete value in digital img.
+
+
+GrayScale/Intensity img.
+    Single channel - (can contain pixel intensities from 0 to 255)
+    Gets compressed with coding schemes
+
+Black & White img.
+    Single channel - but discrete values only (either 0 or 255)
+
+
+RGB model
+    {#_ _ _ _ _ _} where each value can be 0 - 255
+    i.e.,
+        Red     #FF0000     (255,0,0)
+        Green   #00FF00
+        Blue    #0000FF
+    
+    It is a additive color space.
+    Each color is represented by 3 fn.(channels) :    Fr, Fg, Fb
+
+
+Color depth
+    #bits used to indicate the color in a single image.
+    
+        Total Depth = 3 * 8bit  = 24 bits 
+    
+
+
+===========================================================================================================================================
+Color Spaces
+===========================================================================================================================================
+They're the Mathematical model describing the way colors can be represented using tuples of numbers. 
+
+RGB model
+    Each color is represented by 3 fn.(channels) : red, green, blue
+    
+    It cant be used for effective color segmentation of color.
+    {mixing of color information & luminance} 
+    i.e., it does not provide a straightforward way to isolate color information from luminance.
+
+CMYK model
+    Cyan-magenta-yellow key model {used for printing}
+    key denotes black color.
+    It is a subtractive color model.
+
+Half-toning
+    Process of printing the paper/img. using less ink.
+
+HSV model
+    Hue-saturation-value model
+    {H determines color, S determines its shade/darkness, V determines the brightness}
+
+    Used where color segmentation is required. i.e., color tracking, hand gesture detection
+
+
+Need for color models :
+    for Color transfer btw 2 images
+    camera filters
+    intensity equilization of RGB images.
+    CV segmentation projects,i.e, Air canvas
+
+
+
+===========================================================================================================================================
+NumPy basics
+===========================================================================================================================================
+Usage of common fn. like :
+array()             eye()               random.rand()               shape               max
+zeros()             arange()            random.randint()            size                min
+ones()              linspace()                                      dtype
+full()                                                              astype()
+
+Accessing elements using colon(:)
+
+Some other fn. :
+reversal
+reshape()
+append()
+delete()
+ravel() vs reshape()
+concatenate()
+transpose()
+copy()
+
+
+
+===========================================================================================================================================
+Virtual Environment
+===========================================================================================================================================
+It is a self contained directory tree which addresses the basic problem of isolated Environments with different dependencies and versions.
+
+To install Virtual Environment:
+Windows :       pip install virtualenv
+Ubuntu  :       sudo apt install python3-venv
+
+To create a VE:
+>> python3 -m venv <Project_dir_name>
+
+To activate VE:         {1st enter the Project_dir}
+Windows :       ./Project_dir/scripts/activate
+Ubuntu  :       source bin/activate
+
+To de-activate VE:
+>> deactivate
+
+
+Usage of sys.argv vector 
+    for taking user inputs and accessing them @CLI
+
+
+To install OpenCV :
+Any     :       pip install opencv-python
+
+
+
+===========================================================================================================================================
+Handling user i/p i.e., photos/videos
+===========================================================================================================================================
+To RW images :
+cv2.imread()
+cv2.imwrite()
+
+To RW videos :
+cv2.VideoCapture()
+cv2.VideoWriter()
+
+To read or write a video {compressed stacked frames} is decided by CODECS, 
+    i.e., using fourcc
+
+
+
+===========================================================================================================================================
+Working with shapes
+===========================================================================================================================================
+Types of lines :
+Quadrupal(line_4), Octa(line_8), Anti-aliased(line_AA)
+
+Aliasing vs Anti-Aliasing :
+    Aliased lines are discrete {line_4, line_8}
+    {drawn using Bressenham algo.}
+    
+    whereas, in AA lines, we use nearby pixels with some lighter/darker shade (as reqd), to give better overall structure smoothing.
+    {drawn using Gaussian filtering}
+
+
+Polylines is used for contour or shape-detection
+
+
+
+===========================================================================================================================================
+Scaling, translation & rotation of images
+===========================================================================================================================================
+An Optical zoom means moving the zoom lens so that it increases the magnification of light, before it even reaches the digital sensor.
+A digital zoom is not really a zoom, it is simply interpolating the image after it has been acquired at the sensor (pixilation process)
+
+Scaling -> Changing img. size, i.e, by inc./dec. #pixels in digital image.
+            {resampling an image, & then assigning new grayvalues to the resampled img.}
+            Interpolation -> (~ Aliasing) placing pixels with equivalent RGB values inbtw the newly created gaps
+`                            Improves overall img. quality
+            
+`           img. with No Interpolation is simply zoomed, quality detors.
+
+Different types of Interpolation avl. in OpenCV:
+    Linear, Area, Cubic, 
+    Nearest Neighbour, 
+    sinusodal Interpolation
+
+
+Linear Interpolation is the process of estimating the values of a continous fn., from 2 discrete samples.
+    i.e, we have RGB values for pts. A(x0,y0) & B(x1,y1)
+            & pt. C lies somewhere btw then, 
+                then the RGB values for pt C can be computed as :       
+                    (y - y0) / (x - x0) = (y1 - y0) / (x1 - x0)
+
+                    OR
+                    
+                    y = y0 + (y1 - y0) * (x - x0)/(x1 - x0)
+
+
+Translation
+    Shifting an img. in coord-space by adding a specific value to x/y coord.
+
+Process for Translation :
+    1. form Translation matrix(M)
+`            T = [(1, 0 , tx), (0, 1, ty)]
+`                                           where, tx & ty are values for translation(offset) along x & y-axis
+
+    2. Apply M to img.              {using cv2.warpAffine() fn.}
+
+
+i/p matrix(M) to cv2.warpAffine() fn. must be dim. (2 x 3)
+
+
+Rotation
+    Allows to rotate + scale an img.
+
+Process for Rotation :
+    1. form Rotation matrix(M)
+`            R = [(alpha, beta , (1-a).center.x - b.center.y), (-b, a, b.center.x + (1-a).center.y)]
+`                                           where, 
+`                                                   a = scale.cos(theta)
+`                                                   b = scale.sin(theta)
+
+    2. Apply M to img.              {using cv2.warpAffine() fn.}
+
+
+
+===========================================================================================================================================
+Transforms : Euclidean, affine, projective
+===========================================================================================================================================
+Geometric transformation
+    To modify spatial relationship btw pixels
+
+    Img. can be shifted/ rotated/ stretched in multiple ways.
+
+Types of Geometric transformation:
+    1. Euclidean or Isometric transformation
+            Img. is shifted along x or y-axis, or rotated along some angle/axis.
+    
+        subset of affine transformation.
+        It has 3 degree of freedom. 
+        distances, angles & shapes are preserved.
+
+    2. Affine transformation
+            parallel lines are preserved, but may be sheared
+            squares may become //gm.
+
+        matrix can be rotated/translated/scaled/sheared
+        It has 6 degree of freedom.
+    
+    3. Projective transformation
+            highest lvl of transformation/rotation
+
+            even parallel lines are not preserved
+
+
+
+===========================================================================================================================================
+Canny Edge Detection
+===========================================================================================================================================
+It involves the following steps:
+    1.Grayscale Conversion
+        reducing the image to a single channel,simplifying the processing without losing significant edge information.
+
+    2.Smoothing (Gaussian Blur)
+        reduces the noise & impact of small variations in intensity. {requires a gaussian kernel}
+
+    3.Gradient Calculation
+        to compute the gradient of the image intensity. 
+        It is done using convolution with Sobel kernels.
+        (one for detecting changes in the horizontal direction and another for changes in the vertical direction)
+        
+        The gradient magnitude and direction at each pixel are then calculated.
+
+    4.Non-maximum Suppression
+        NMS is applied to thin the edges.
+        For each pixel, the algorithm only keeps the local maxima in the gradient direction and sets all other values to zero. 
+        This ensures that only the most prominent edges are retained.
+
+    5.Double Thresholding
+        It is used to classify edges into strong, weak, and non-edges. {sandwitching}
+
+    6.Edge Tracking by Hysteresis
+        Weak edges that are connected to strong edges are considered part of the edge structure. 
+        A process called edge tracking by hysteresis is employed, 
+            where weak edges are included in the final edge map if they are connected to strong edges. 
+        This helps in forming continuous edge contours.
+
+The result of these steps is a binary image where pixels are classified as either part of an edge or not. 
+The Canny edge detection algorithm is effective in detecting edges with good localization and minimal response to noise. 
+
+
+
+===========================================================================================================================================
+Convolution & Filtering
+===========================================================================================================================================
+Convolutions
+    A kernel(fixed matrix of 3x3) is fixed with its center on each pixel is applied to org_img, & corresponding pixels are multiplied.
+    Every pixel value is then changed by sum of all multiplications, one by one.
+    {i/p & o/p matrices are of same size}
+
+    for handling output when kernal window moves out of bound for img r/c, multiply them with 0.
+
+Kernels with odd dimensions are preferred.
+    {as it is easy to locate center}
+
+Kernel is known as img. filter.
+Process of applying kernel to given img.    -> img. filtering
+o/p obtained after applying kernel to img.  -> filtered img.
+
+
+Freq. in img.
+    rate of change in pixel values
+    i.e,
+        sharp edges -> high frequency   {high contrast}
+        plain areas -> low frequency    {low/no contrast}
+
+Low pass filters
+    It is a type of freq. domain filter that attenuates/removes the high freq. components 
+    & preserves the low freq. components.
+
+    It smoothes the img., i.e., by only allowing the freq. below cut-off freq. to pass through it.
+    Helps in removing aliasing effect.
+    i.e.,
+        Blurring (average out pixel values, based on filter size)
+
+High pass filters
+    It is a type of freq. domain filter that attenuates/removes the low freq. components 
+    & preserves the high freq. components.
+
+    Only allows the freq. above cut-off freq. to pass through it.
+    i.e., 
+        Sharpening, noise removal, edge detection
+
+
+Blurring using normalized filters
+    divided by #pixels in filter size to normalize the pixel value, i.e., to reduce the intensity.
+
+    Blurring increases on increasing filter size.
+
+    fn. in OpenCV :     cv2.filter2D()
+
+
+Motion blurring
+    In normal blurring we've averaging out all values, 
+    whereas, in motion blurring we average out values in specific direction only.
+    {creates diziness}
+    i.e.,
+        a directional low pass filter :     M = [(0,0,0),(1,1,1),(0,0,0)]
+
+
+
+===========================================================================================================================================
+Image Sharpening, noise reduction, blur 
+===========================================================================================================================================
+Kernel blur
+    Uses cv2.filter2D() fn.
+    
+blur() fn.
+    Uses cv2.blur() fn. {already normalized, doesnt requires us to define & apply kernel seperately}
+
+Box filtering 
+    Same as blur() fn., except it allows depth functionality aswell as in filter2D
+    Used cv2.boxFilter() fn.
+
+guassian blur
+    Far better than other filters.
+    Filter/kernel is formed s.t. it multiplies a pixel by some weight, that is defined by its location from kernel's center.
+    
+    Lower the sigma-x (std_dev along x-axis), lower the _/\_ graph (becomes flat).
+
+median blur
+    replaces pixel values with the median of all values lying under the kernel area.
+    Used for noise reduction + Beautification of img.
+    Always a square kernel.
+
+bilateral filtering
+    helps in reduction of noise + preservation of edges (even though its a low-pass filter).
+
+
+Sharpening image
+    increases intensity of already high valued pixels.
+    Take the blurred_version of the img, 
+        & minus it from org. img to obtain a sharper img
+    
+    Done using cv2.addWeighted() fn.
+
+
+
+===========================================================================================================================================
+Contour detection
+===========================================================================================================================================
+Contour is a boundary around something that has a well defined edges.
+{calculated using difference in gradient}
+
+Used for detecting outlines/border across object.
+{i.e., foreground extraction, image segmentation, detection & recognition}
+
+It is only applied to binary images (not grayscale images)
+
+
+
+===========================================================================================================================================
+Erosion & Dilation
+===========================================================================================================================================  
