@@ -6,15 +6,25 @@ from helpers import *
 # Creation of Panaroma from given set of images in a DIR
 def part1(input_path, output_path):
     image_paths = open_image_files(input_path)
+    Images = []
 
     if not image_paths:
         print(f"[ERROR] No images found in '{input_path}'.")
         return
     
+    print(f"Found {len(image_paths)} images in the given Directory!")
+    
     for img_path in image_paths:
         img = cv2.imread(img_path)
-        
+        Images.append(img)
 
+    BaseImage, _, _ = ProjectOntoCylinder(Images[0])   
+    for i in range(1, len(Images)):
+        StitchedImage = StitchImages(BaseImage, Images[i])
+        print(i)
+        BaseImage = StitchedImage.copy()    
+
+    cv2.imwrite("Stitched_Panorama.png", BaseImage) 
     print(f"[SUCCESS] Panaromic image generated at location : '{output_path}'")
 
 
@@ -36,7 +46,7 @@ def part2(input_path, output_path):
 
 if __name__ == "__main__":   
     if len(sys.argv) != 4:
-        print("Usage: python3 main.py <part_id> <img_dir> <output_dir>")
+        print("Usage: python main.py <part_id> <img_dir> <output_dir>")
         sys.exit(1)
 
     part_id = int(sys.argv[1])
