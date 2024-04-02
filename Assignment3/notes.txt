@@ -1,0 +1,53 @@
+Hand detection & recognition 
+
+1. Hand detection
+a) Pre-processing       - noise reduction & grayscale
+b) Feature extraction   - HoG descriptors for Region of interest(ROI) in the image.
+c) Training             - use HOG descriptors for training the SVM model for classification.
+d) Detection            - use validation set to identify hands & create rectanguler boxes around them.
+
+2. Recognition 
+(Hands open/close)
+
+
+
+=======================================================================================================================
+Support Vector M/c (SVM)
+
+    Supervised learning model
+    Can be used for classification & regressions problems
+    Roburst against Outliers
+    Can used for Non-linear data
+
+    Steps : 
+        Consider a hyper plane eqn.
+        Find the (pie)+ & (pie)- that touches the nearest +ve & -ve point respectively. (Support vectors -> all the points lying on pie plane)
+        Then compute the margin distance d btw (pie)+ & (pie)-
+        Result -> select the hyperplane with MAX. d 
+
+    Here we try find a hyperplane that can maximize the marginal dist. of all points to it.
+    {i.e., it'll result in better accuracy on validation set, by having better convergence}
+
+
+Eqn. of plane in N-dim. :
+    w(Transpose) * x + w(0) = 0                 -> w(0) = 0 implies Hyperplane passes through the origin
+
+    Gen. eqn. of line:
+        ax + by + c = 0
+
+            OR 
+
+        y = mx + c 
+        where, m = -b/a     &   c = -c/a
+
+
+Dot product :
+    a.b = |a|*|b|*cos(theta) 
+
+
+=======================================================================================================================
+Histogram of Oriented Gradients (HoG)
+    At every pixel in the image, compute Ix & Iy.
+    Compute I & tan(theta) values at every pixel.
+
+    Orientation binning - Plot the distribution graph of counts of magnitude over 36 bins {hence max. angle = 360}
