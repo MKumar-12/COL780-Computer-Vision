@@ -3,4 +3,5 @@ tqdm
 mediapipe
 matplotlib 
 scikit-image 
+scikit-learn
 numpy

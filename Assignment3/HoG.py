@@ -1,11 +1,9 @@
-# import matplotlib.pyplot as plt
-from skimage import io
-from skimage import color
+from skimage import io, color
 from skimage.transform import resize
-import math
-from skimage.feature import hog
 import numpy as np
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import math
 
 
 def calculate_hog_features_multiple(image_paths):
@@ -23,7 +21,7 @@ def calculate_hog_features(image_path):
     # plt.figure(figsize=(15, 8))
     # plt.imshow(img, cmap="gray")
     # plt.axis("off")
-    # plt.show()
+    # plt.savefig('init_img.png')
 
     img = np.array(img)
     mag = []
@@ -75,14 +73,13 @@ def calculate_hog_features(image_path):
     # plt.figure(figsize=(15, 8))
     # plt.imshow(mag, cmap="gray")
     # plt.axis("off")
-    # plt.show()
+    # plt.savefig('magnitude.png')
 
     # Dir. of all blocks
     # plt.figure(figsize=(15, 8))
     # plt.imshow(theta, cmap="gray")
     # plt.axis("off")
-    # plt.show()
-
+    # plt.savefig('dir.png')
 
     # Histogram Binning
     number_of_bins = 9
@@ -120,12 +117,6 @@ def calculate_hog_features(image_path):
             temp.append(bins)
         histogram_points_nine.append(temp)
 
-    # print(len(histogram_points_nine))
-    # print(len(histogram_points_nine[0]))
-    # print(len(histogram_points_nine[0][0]))
-
-
-
     epsilon = 1e-05
     feature_vectors = []
     for i in range(0, len(histogram_points_nine) - 1, 1):
@@ -142,9 +133,5 @@ def calculate_hog_features(image_path):
             temp.append(final_vector)
         feature_vectors.append(temp)
 
-    # print(len(feature_vectors))
-    # print(len(feature_vectors[0]))
-    # print(len(feature_vectors[0][0]))
-
-    # print(f'Number of HOG features = {len(feature_vectors) * len(feature_vectors[0]) * len(feature_vectors[0][0])}')
+    # print(f'[LOG] Number of HOG features = {len(feature_vectors) * len(feature_vectors[0]) * len(feature_vectors[0][0])}')
     return feature_vectors
