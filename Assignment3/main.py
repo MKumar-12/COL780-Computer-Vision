@@ -9,6 +9,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import precision_score, recall_score, f1_score
 from sklearn.metrics import roc_curve, auc
 import joblib
+import cv2
 
 
 train_folders = [
@@ -103,6 +104,9 @@ def main():
     predicted_labels = []
     predicted_probabilities = []
 
+    output_directory = os.path.join(os.path.dirname(__file__), "validate_res")
+    os.makedirs(output_directory, exist_ok=True)
+
     # Validation
     print("[*] ====================Model Statistics====================")
     for folder in validate_folders:
@@ -127,6 +131,19 @@ def main():
 
         accuracy = np.mean(y_pred == label) * 100
         print(f"[*] Accuracy on {folder}: {accuracy:.3f}%")
+        
+
+        for i, img_path in enumerate(image_paths):
+            img = cv2.imread(img_path)
+            if y_pred[i] == 0:
+                predicted_label_text = "Predicted: Close"
+            else:
+                predicted_label_text = "Predicted: Open"
+
+            cv2.putText(img, predicted_label_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            output_img_path = os.path.join(output_directory, f"predicted_{y_pred[i]}_{os.path.basename(img_path)}")
+            cv2.imwrite(output_img_path, img)
+        print(f"[*] Saved images with predicted label at: {output_directory}")
         print()
 
 
@@ -147,6 +164,8 @@ def main():
 
     fpr, tpr, thresholds = roc_curve(true_labels, predicted_probabilities)
     roc_auc = auc(fpr, tpr)
+    # print(f"[*] FPR : {fpr}")
+    # print(f"[*] TPR : {tpr}")
 
     plt.figure()
     plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
@@ -164,3 +183,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# To execute the script [WSL-Linux]: python3 main.py
