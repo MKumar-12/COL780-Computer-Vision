@@ -81,21 +81,25 @@ def FindMatches(BaseImage, SecImage):
     gray_img_sec = cv2.cvtColor(SecImage, cv2.COLOR_BGR2GRAY)
     BaseImage_kp, BaseImage_des = sift.computeKeypointsAndDescriptors(gray_img_base)
     SecImage_kp, SecImage_des = sift.computeKeypointsAndDescriptors(gray_img_sec)
-
-    print(f"#KeyPoints found in Base-img  are : {len(BaseImage_kp)}")
-    print(BaseImage_des.shape)
-    print(f"#KeyPoints found in Sec-img  are : {len(SecImage_kp)}")
-    print(SecImage_des.shape)
     
-    base_with_keypoints = cv2.drawKeypoints(gray_img_base, BaseImage_kp, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    cv2.imshow("BaseImg with Keypoints", base_with_keypoints)
-    cv2.waitKey(0)
+    # sift = cv2.SIFT_create()
+    # BaseImage_kp, BaseImage_des = sift.detectAndCompute(gray_img_base, None)
+    # SecImage_kp, SecImage_des = sift.detectAndCompute(gray_img_sec, None)
 
-    sec_with_keypoints = cv2.drawKeypoints(gray_img_sec, SecImage_kp, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    cv2.imshow("SecImg with Keypoints", sec_with_keypoints)
-    cv2.waitKey(0)
+    # print(f"#KeyPoints found in Base-img  are : {len(BaseImage_kp)}")
+    # print(BaseImage_des.shape)
+    # print(f"#KeyPoints found in Sec-img  are : {len(SecImage_kp)}")
+    # print(SecImage_des.shape)
+    
+    # base_with_keypoints = cv2.drawKeypoints(gray_img_base, BaseImage_kp, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    # cv2.imshow("BaseImg with Keypoints", base_with_keypoints)
+    # cv2.waitKey(0)
 
-    cv2.destroyAllWindows()
+    # sec_with_keypoints = cv2.drawKeypoints(gray_img_sec, SecImage_kp, None, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    # cv2.imshow("SecImg with Keypoints", sec_with_keypoints)
+    # cv2.waitKey(0)
+
+    # cv2.destroyAllWindows()
     
 
     # Using Brute Force matcher to find matches.
