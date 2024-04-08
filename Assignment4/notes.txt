@@ -1,0 +1,10 @@
+Mammogram detection for breast cancer
+    x-rays of breast in 4kx4k dim. from Side-view(MLO) & top-view(CC) for identifying regions of malignant tissues.
+
+    classify + localize cancerous regions within the mammograms.
+
+
+
+Train 2 obj. detection models :
+    1. Based on convolution    -> faster-RCNN, or a YOLO-based model
+    2. Transformer based model -> DAB-DETR, Deformable DETR, DINO 

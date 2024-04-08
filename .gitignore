@@ -1,2 +1,9 @@
 *.jpg
 *.pkl
+
+#Exclude dataset dir.
+Assignment4/mammo_1k/coco_1k/train2017
+Assignment4/mammo_1k/coco_1k/val2017
+Assignment4/mammo_1k/yolo_1k/train/images
+Assignment4/mammo_1k/yolo_1k/val/images
+Assignment4/sample_test/test/images
