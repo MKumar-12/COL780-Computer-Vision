@@ -1,6 +1,9 @@
 *.jpg
 *.pkl
 
+#Exclude cache dir.
+Assignment3/__pycache__/*.pyc
+
 #Exclude dataset dir.
 Assignment4/mammo_1k/coco_1k/train2017
 Assignment4/mammo_1k/coco_1k/val2017
