@@ -1,4 +1,4 @@
-# COP780 : Computer Vision
+# COL780 : Computer Vision
 
 This repository contains the codebase for assignments completed during the course structure of CV (WINTER-24). 
 The assignments were completed as part of the COL780 course at IIT Delhi under the supervision of Prof. Chetan Arora.
